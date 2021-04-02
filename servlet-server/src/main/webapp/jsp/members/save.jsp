@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.irostub.servletserver.domain.member.MemberRepository" %>
 <%@ page import="com.irostub.servletserver.domain.member.Member" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
