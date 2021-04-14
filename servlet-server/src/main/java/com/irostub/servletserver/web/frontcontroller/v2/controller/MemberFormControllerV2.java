@@ -1,7 +1,7 @@
 package com.irostub.servletserver.web.frontcontroller.v2.controller;
 
 import com.irostub.servletserver.web.frontcontroller.v2.ControllerV2;
-import com.irostub.servletserver.web.frontcontroller.v2.MyView;
+import com.irostub.servletserver.web.frontcontroller.MyView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

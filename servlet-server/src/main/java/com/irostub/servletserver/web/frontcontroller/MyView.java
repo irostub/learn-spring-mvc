@@ -1,10 +1,13 @@
-package com.irostub.servletserver.web.frontcontroller.v2;
+package com.irostub.servletserver.web.frontcontroller;
+
+import com.irostub.servletserver.web.frontcontroller.v3.ModelView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 public class MyView {
 
@@ -15,6 +18,11 @@ public class MyView {
     }
 
     public void render(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(viewPath);
+        requestDispatcher.forward(req, resp);
+    }
+
+    public void render(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(viewPath);
         requestDispatcher.forward(req, resp);
     }
