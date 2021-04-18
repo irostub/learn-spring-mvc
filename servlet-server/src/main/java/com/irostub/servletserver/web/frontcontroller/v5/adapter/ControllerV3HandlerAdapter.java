@@ -1,14 +1,11 @@
 package com.irostub.servletserver.web.frontcontroller.v5.adapter;
 
 import com.irostub.servletserver.web.frontcontroller.ModelView;
-import com.irostub.servletserver.web.frontcontroller.MyView;
 import com.irostub.servletserver.web.frontcontroller.v3.ControllerV3;
 import com.irostub.servletserver.web.frontcontroller.v5.MyHandlerAdapter;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
