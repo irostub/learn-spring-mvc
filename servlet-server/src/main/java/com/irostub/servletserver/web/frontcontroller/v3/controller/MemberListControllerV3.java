@@ -3,7 +3,7 @@ package com.irostub.servletserver.web.frontcontroller.v3.controller;
 import com.irostub.servletserver.domain.member.Member;
 import com.irostub.servletserver.domain.member.MemberRepository;
 import com.irostub.servletserver.web.frontcontroller.v3.ControllerV3;
-import com.irostub.servletserver.web.frontcontroller.v3.ModelView;
+import com.irostub.servletserver.web.frontcontroller.ModelView;
 
 import java.util.List;
 import java.util.Map;

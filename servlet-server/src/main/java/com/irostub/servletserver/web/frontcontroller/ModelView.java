@@ -1,4 +1,4 @@
-package com.irostub.servletserver.web.frontcontroller.v3;
+package com.irostub.servletserver.web.frontcontroller;
 
 import java.util.HashMap;
 import java.util.Map;

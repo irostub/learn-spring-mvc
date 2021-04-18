@@ -1,7 +1,5 @@
 package com.irostub.servletserver.web.frontcontroller;
 
-import com.irostub.servletserver.web.frontcontroller.v3.ModelView;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +21,12 @@ public class MyView {
     }
 
     public void render(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        modelToRequestAttribute(model, req);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(viewPath);
         requestDispatcher.forward(req, resp);
+    }
+
+    private void modelToRequestAttribute(Map<String, Object> model, HttpServletRequest req) {
+        model.forEach(req::setAttribute);
     }
 }
