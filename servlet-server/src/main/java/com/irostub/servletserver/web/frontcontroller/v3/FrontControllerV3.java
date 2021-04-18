@@ -1,5 +1,6 @@
 package com.irostub.servletserver.web.frontcontroller.v3;
 
+import com.irostub.servletserver.web.frontcontroller.ModelView;
 import com.irostub.servletserver.web.frontcontroller.MyView;
 import com.irostub.servletserver.web.frontcontroller.v3.controller.MemberFormControllerV3;
 import com.irostub.servletserver.web.frontcontroller.v3.controller.MemberListControllerV3;
@@ -18,7 +19,7 @@ import java.util.Map;
 public class FrontControllerV3 extends HttpServlet {
     private Map<String, ControllerV3> controllerMap = new HashMap<>();
 
-    public FrontControllerV3(Map<String, ControllerV3> controllerMap) {
+    public FrontControllerV3() {
         controllerMap.put("/front-controller/v3/members/new-form", new MemberFormControllerV3());
         controllerMap.put("/front-controller/v3/members/save", new MemberSaveControllerV3());
         controllerMap.put("/front-controller/v3/members", new MemberListControllerV3());
@@ -35,14 +36,19 @@ public class FrontControllerV3 extends HttpServlet {
             return;
         }
 
-        Map<String, String> paramMap = new HashMap<>();
-        req.getParameterNames().asIterator()
-                .forEachRemaining(name-> paramMap.put(name, req.getParameter(name)));
+        Map<String, String> paramMap = createParamMap(req);
 
         ModelView modelView = controllerV3.process(paramMap);
         String viewName = modelView.getViewName();
         MyView view = viewResolver(viewName);
         view.render(modelView.getModel(), req, resp);
+    }
+
+    private Map<String, String> createParamMap(HttpServletRequest req) {
+        Map<String, String> paramMap = new HashMap<>();
+        req.getParameterNames().asIterator()
+                .forEachRemaining(name-> paramMap.put(name, req.getParameter(name)));
+        return paramMap;
     }
 
     private MyView viewResolver(String viewName) {
