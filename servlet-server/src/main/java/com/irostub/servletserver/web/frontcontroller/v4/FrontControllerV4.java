@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "FrontControllerV4",urlPatterns = "/front-controller/v4/*")
+@WebServlet(name = "FrontControllerV4", urlPatterns = "/front-controller/v4/*")
 public class FrontControllerV4 extends HttpServlet {
     private Map<String, ControllerV4> controllerMap = new HashMap<>();
 
@@ -30,7 +30,7 @@ public class FrontControllerV4 extends HttpServlet {
 
         ControllerV4 controllerV4 = controllerMap.get(requestUrl);
 
-        if(controllerV4 == null){
+        if (controllerV4 == null) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
@@ -39,10 +39,10 @@ public class FrontControllerV4 extends HttpServlet {
         Map<String, Object> model = new HashMap<>();
 
         req.getParameterNames().asIterator()
-                .forEachRemaining(name-> paramMap.put(name, req.getParameter(name)));
+                .forEachRemaining(name -> paramMap.put(name, req.getParameter(name)));
 
 
-        String viewName = controllerV4.process(paramMap,model);
+        String viewName = controllerV4.process(paramMap, model);
         MyView view = viewResolver(viewName);
         view.render(model, req, resp);
     }
