@@ -4,8 +4,7 @@ import com.irostub.servletserver.domain.member.Member;
 import com.irostub.servletserver.domain.member.MemberRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,12 +21,14 @@ public class SpringMemberControllerV3 {
         return "members";
     }
 
-    @RequestMapping("/new-form")
+    //@RequestMapping(value = "/new-form", method = RequestMethod.GET)
+    @GetMapping("/new-form")
     public String newForm() {
         return "new-form";
     }
 
-    @RequestMapping("/save")
+    //@RequestMapping(value = "/save", method = RequestMethod.POST)
+    @PostMapping("/save")
     public String save(@RequestParam String username, @RequestParam int age, Model model) {
         Member member = new Member(username, age);
         memberRepository.save(member);
