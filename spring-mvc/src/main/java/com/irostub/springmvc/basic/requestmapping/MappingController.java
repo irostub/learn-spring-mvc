@@ -1,5 +1,6 @@
 package com.irostub.springmvc.basic.requestmapping;
 
+import com.irostub.springmvc.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -54,10 +55,25 @@ public class MappingController {
     }
 
     //클라이언트 쪽이 서버 쪽에서 준 데이터를 소비하는 쪽일 때
-//    @PostMapping(value = "/mapping-produce", produces = "text/html")
+    //@PostMapping(value = "/mapping-produce", produces = "text/html")
     @PostMapping(value = "/mapping-produce", produces = MediaType.TEXT_HTML_VALUE)
     public String mappingProduce() {
         log.debug("mappingProduce");
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+        log.debug("username = {}, age = {}", helloData.getUsername(), helloData.getAge());
+        return "ok";
+    }
+
+    //만약 형식에 맞지 않는 데이터가 들어올 경우 binding exception 발생
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(HelloData helloData) {
+        log.debug("username = {}, age = {}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
 }
