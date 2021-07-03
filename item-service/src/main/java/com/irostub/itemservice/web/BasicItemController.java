@@ -5,8 +5,7 @@ import com.irostub.itemservice.domain.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -24,16 +23,36 @@ public class BasicItemController {
         return "basic/items";
     }
 
+    @GetMapping("/{id}")
+    public String item(@PathVariable Long id, Model model) {
+        Item findItem = repository.findById(id);
+        model.addAttribute("item", findItem);
+        return "basic/item";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        Item findItem = repository.findById(id);
+        model.addAttribute("item", findItem);
+        return "basic/editForm";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String edit(@PathVariable Long id, @ModelAttribute Item item) {
+        repository.update(id, item);
+        return "redirect:/basic/items/{itemId}";
+    }
+
+    @PostMapping("/add")
+    public String add(@ModelAttribute Item item) {
+        repository.save(item);
+        return "/basic/items";
+    }
+
     @PostConstruct
     void init() {
-        Item item1 = Item.builder()
-                .itemName("iro")
-                .quantity(10)
-                .price(6000).build();
-        Item item2 = Item.builder()
-                .itemName("iro")
-                .quantity(20)
-                .price(10000).build();
+        Item item1 = new Item("iro",6000,10);
+        Item item2 = new Item("iro", 10000, 20);
 
         repository.save(item1);
         repository.save(item2);
