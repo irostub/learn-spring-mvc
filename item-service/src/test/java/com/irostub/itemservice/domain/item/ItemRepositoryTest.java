@@ -22,11 +22,7 @@ class ItemRepositoryTest {
     @DisplayName("저장 테스트")
     void save(){
         //given
-        Item item = Item.builder()
-                .itemName("coco")
-                .price(6000)
-                .quantity(10)
-                .build();
+        Item item = new Item("coco", 6000, 10);
 
         //when
         Item save = repository.save(item);
@@ -40,8 +36,8 @@ class ItemRepositoryTest {
     @DisplayName("전체 조회 테스트")
     void findAll() {
         //given
-        Item item1 = Item.builder().itemName("iro").price(2000).quantity(1).build();
-        Item item2 = Item.builder().itemName("diph").price(3000).quantity(1).build();
+        Item item1 = new Item("iro", 2000,10);
+        Item item2 = new Item("diph", 3000, 20);
         repository.save(item1);
         repository.save(item2);
         
@@ -57,18 +53,18 @@ class ItemRepositoryTest {
     @DisplayName("갱신 테스트")
     void update() {
         //given
-        Item item = Item.builder().itemName("iro").quantity(1).price(2000).build();
+        Item item = new Item("iro", 3000, 20);
         Item saveItem = repository.save(item);
         Long id = saveItem.getId();
 
-        Item updateParam = Item.builder().itemName("diph").price(3000).quantity(2).build();
+        Item updateParam = new Item("diph", 2000, 19);
         //when
         repository.update(id, updateParam);
 
         //then
         Item findItem = repository.findById(id);
         assertThat(findItem.getItemName()).isEqualTo("diph");
-        assertThat(findItem.getPrice()).isEqualTo(3000);
-        assertThat(findItem.getQuantity()).isEqualTo(2);
+        assertThat(findItem.getPrice()).isEqualTo(2000);
+        assertThat(findItem.getQuantity()).isEqualTo(19);
     }
 }
